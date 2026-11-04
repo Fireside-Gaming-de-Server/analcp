@@ -167,3 +167,17 @@ html:root body .sidebar-toggle, html:root body .toggle-sidebar-left { border: 0;
   html:root.sidebar-left-collapsed body .sidebar-left .nano:hover,
   html:root.sidebar-left-collapsed body .sidebar-left .nano.hovered { background: #15181c; box-shadow: 12px 0 32px #0005; }
 }
+
+/* Dashboard totals: independent rings because players can have multiple roles. */
+html:root body .fs-circle-card .card-body { padding: 24px; text-align: center; }
+html:root body .fs-circle-title { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 0 0 22px; font-size: 13px; font-weight: 600; }
+html:root body .fs-circle-title i { color: #fff; }
+.fs-stat-ring { display: grid; place-items: center; width: 164px; height: 164px; margin: 0 auto; border-radius: 50%; background: conic-gradient(var(--fs-red) var(--ring-progress), #30353e 0); }
+.fs-stat-ring-center { display: flex; flex-direction: column; justify-content: center; width: 142px; height: 142px; border-radius: 50%; background: var(--fs-panel); }
+.fs-stat-ring-center strong { color: #fff; font-size: 30px; line-height: 1.3; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.8px; }
+.fs-stat-ring-center span { color: var(--fs-muted); font-size: 11px; }
+html:root body .fs-circle-caption { margin: 20px 0 0; color: var(--fs-muted); font-size: 12px; }
+.fs-circle-caption strong { color: #fff; font-weight: 600; }
+@media (max-width: 767px) {
+  html:root body .fs-circle-card .card-body { padding: 22px; }
+}

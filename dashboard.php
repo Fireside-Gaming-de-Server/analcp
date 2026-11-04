@@ -525,72 +525,53 @@ if (apcu_exists('chartUniquePlayers14')) {
                         <?php if (!empty($_SESSION["rightsArr"]["visitPlayerOnline"])): ?>
                         <a class="btn btn-default" href="onlinePlayers.php"><i class="fas fa-users" aria-hidden="true"></i> Spieler online</a>
                         <?php endif; ?>
-                        <a class="btn btn-default" href="PatchNotes.php"><i class="fas fa-list" aria-hidden="true"></i> Patchnotes</a>
                     </div>
                 </section>
 				<div class="row">
 					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-users"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">SPIELER INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $usersComplete; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+						<section class="card fs-circle-card mb-4">
+                                <div class="card-body">
+                                    <h2 class="fs-circle-title"><i class="fas fa-users" aria-hidden="true"></i> Spieler insgesamt</h2>
+                                    <?php $circlePercent = (int) $usersComplete > 0 ? min(100, max(0, (int) $usersComplete / (int) $usersComplete * 100)) : 0; ?>
+                                    <div class="fs-stat-ring" style="--ring-progress: <?php echo number_format($circlePercent, 3, '.', ''); ?>%;" role="img" aria-label="Spieler insgesamt: <?php echo (int) $usersComplete; ?>, <?php echo number_format($circlePercent, 1, ',', '.'); ?> Prozent aller Spieler">
+                                        <div class="fs-stat-ring-center" aria-hidden="true">
+                                            <strong><?php echo number_format((int) $usersComplete, 0, ',', '.'); ?></strong>
+                                            <span>Spieler</span>
+                                        </div>
+                                    </div>
+                                    <p class="fs-circle-caption">Registrierte Spieler insgesamt</p>
+                                </div>
+                            </section>
 					</div>
 					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-user-police"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">COPS INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $copsInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+						<section class="card fs-circle-card mb-4">
+                                <div class="card-body">
+                                    <h2 class="fs-circle-title"><i class="fas fa-user-shield" aria-hidden="true"></i> Cops</h2>
+                                    <?php $circlePercent = (int) $usersComplete > 0 ? min(100, max(0, (int) $copsInsgesamt / (int) $usersComplete * 100)) : 0; ?>
+                                    <div class="fs-stat-ring" style="--ring-progress: <?php echo number_format($circlePercent, 3, '.', ''); ?>%;" role="img" aria-label="Cops: <?php echo (int) $copsInsgesamt; ?>, <?php echo number_format($circlePercent, 1, ',', '.'); ?> Prozent aller Spieler">
+                                        <div class="fs-stat-ring-center" aria-hidden="true">
+                                            <strong><?php echo number_format((int) $copsInsgesamt, 0, ',', '.'); ?></strong>
+                                            <span>Spieler</span>
+                                        </div>
+                                    </div>
+                                    <p class="fs-circle-caption"><strong><?php echo number_format($circlePercent, 1, ',', '.'); ?> %</strong> aller Spieler</p>
+                                </div>
+                            </section>
 					</div>
 					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-user-doctor"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">MEDICS INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $medInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+						<section class="card fs-circle-card mb-4">
+                                <div class="card-body">
+                                    <h2 class="fs-circle-title"><i class="fas fa-heartbeat" aria-hidden="true"></i> Medics</h2>
+                                    <?php $circlePercent = (int) $usersComplete > 0 ? min(100, max(0, (int) $medInsgesamt / (int) $usersComplete * 100)) : 0; ?>
+                                    <div class="fs-stat-ring" style="--ring-progress: <?php echo number_format($circlePercent, 3, '.', ''); ?>%;" role="img" aria-label="Medics: <?php echo (int) $medInsgesamt; ?>, <?php echo number_format($circlePercent, 1, ',', '.'); ?> Prozent aller Spieler">
+                                        <div class="fs-stat-ring-center" aria-hidden="true">
+                                            <strong><?php echo number_format((int) $medInsgesamt, 0, ',', '.'); ?></strong>
+                                            <span>Spieler</span>
+                                        </div>
+                                    </div>
+                                    <p class="fs-circle-caption"><strong><?php echo number_format($circlePercent, 1, ',', '.'); ?> %</strong> aller Spieler</p>
+                                </div>
+                            </section>
 					</div>
 				</div>
 
@@ -664,67 +645,49 @@ if (apcu_exists('chartUniquePlayers14')) {
 
 				<div class="row">
 					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-gavel"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">DOJ INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $dojInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+						<section class="card fs-circle-card mb-4">
+                                <div class="card-body">
+                                    <h2 class="fs-circle-title"><i class="fas fa-balance-scale" aria-hidden="true"></i> DOJ</h2>
+                                    <?php $circlePercent = (int) $usersComplete > 0 ? min(100, max(0, (int) $dojInsgesamt / (int) $usersComplete * 100)) : 0; ?>
+                                    <div class="fs-stat-ring" style="--ring-progress: <?php echo number_format($circlePercent, 3, '.', ''); ?>%;" role="img" aria-label="DOJ: <?php echo (int) $dojInsgesamt; ?>, <?php echo number_format($circlePercent, 1, ',', '.'); ?> Prozent aller Spieler">
+                                        <div class="fs-stat-ring-center" aria-hidden="true">
+                                            <strong><?php echo number_format((int) $dojInsgesamt, 0, ',', '.'); ?></strong>
+                                            <span>Spieler</span>
+                                        </div>
+                                    </div>
+                                    <p class="fs-circle-caption"><strong><?php echo number_format($circlePercent, 1, ',', '.'); ?> %</strong> aller Spieler</p>
+                                </div>
+                            </section>
 					</div>
 					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-car-wrench"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">RATS INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $towInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+						<section class="card fs-circle-card mb-4">
+                                <div class="card-body">
+                                    <h2 class="fs-circle-title"><i class="fas fa-truck" aria-hidden="true"></i> RATS</h2>
+                                    <?php $circlePercent = (int) $usersComplete > 0 ? min(100, max(0, (int) $towInsgesamt / (int) $usersComplete * 100)) : 0; ?>
+                                    <div class="fs-stat-ring" style="--ring-progress: <?php echo number_format($circlePercent, 3, '.', ''); ?>%;" role="img" aria-label="RATS: <?php echo (int) $towInsgesamt; ?>, <?php echo number_format($circlePercent, 1, ',', '.'); ?> Prozent aller Spieler">
+                                        <div class="fs-stat-ring-center" aria-hidden="true">
+                                            <strong><?php echo number_format((int) $towInsgesamt, 0, ',', '.'); ?></strong>
+                                            <span>Spieler</span>
+                                        </div>
+                                    </div>
+                                    <p class="fs-circle-caption"><strong><?php echo number_format($circlePercent, 1, ',', '.'); ?> %</strong> aller Spieler</p>
+                                </div>
+                            </section>
 					</div>
 					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-car-building"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">GCM INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $gcmInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+						<section class="card fs-circle-card mb-4">
+                                <div class="card-body">
+                                    <h2 class="fs-circle-title"><i class="fas fa-users" aria-hidden="true"></i> GCM</h2>
+                                    <?php $circlePercent = (int) $usersComplete > 0 ? min(100, max(0, (int) $gcmInsgesamt / (int) $usersComplete * 100)) : 0; ?>
+                                    <div class="fs-stat-ring" style="--ring-progress: <?php echo number_format($circlePercent, 3, '.', ''); ?>%;" role="img" aria-label="GCM: <?php echo (int) $gcmInsgesamt; ?>, <?php echo number_format($circlePercent, 1, ',', '.'); ?> Prozent aller Spieler">
+                                        <div class="fs-stat-ring-center" aria-hidden="true">
+                                            <strong><?php echo number_format((int) $gcmInsgesamt, 0, ',', '.'); ?></strong>
+                                            <span>Spieler</span>
+                                        </div>
+                                    </div>
+                                    <p class="fs-circle-caption"><strong><?php echo number_format($circlePercent, 1, ',', '.'); ?> %</strong> aller Spieler</p>
+                                </div>
+                            </section>
 					</div>
 					<div class="col-lg-4 col-xl-4">
 						<section class="card card-featured-left card-featured-primary mb-4">
