@@ -217,7 +217,7 @@ $dataArr = array(
             <header class="header">
                 <div class="logo-container">
                     <a href="farm-stats.php" class="logo">
-                        <img src="img/logo.png" width="75" height="35" alt="Porto Admin" />
+                        <span class="fs-logo"><img src="img/fireside-logo.png" width="2048" height="2048" alt="Fireside Gaming"></span>
                     </a>
                     <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
                         <i class="fas fa-bars" aria-label="Toggle sidebar"></i>

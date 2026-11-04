@@ -33,3 +33,17 @@ $(document).ready(function(){
         document.location.href = "/datenbankSpielerLevelId.php?search=" + encodeURIComponent( search );      
     });
   });
+// Highlight the current page using the links already permitted in the sidebar.
+$(function () {
+    var currentPath = window.location.pathname.replace(/\/$/, '').replace(/\.php$/, '');
+    $('#menu a[href]').each(function () {
+        var href = this.getAttribute('href');
+        if (!href || href.charAt(0) === '#') return;
+        var target = new URL(href, window.location.href);
+        var targetPath = target.pathname.replace(/\/$/, '').replace(/\.php$/, '');
+        if (target.origin === window.location.origin && targetPath === currentPath) {
+            $(this).attr('aria-current', 'page').closest('li').addClass('nav-active');
+            $(this).parents('li.nav-parent').addClass('nav-expanded nav-active');
+        }
+    });
+});

@@ -515,6 +515,19 @@ if (apcu_exists('chartUniquePlayers14')) {
 					<h2>Dashboard</h2>
 				</header>
 				<!-- start: page -->
+                <section class="fs-welcome" aria-labelledby="welcome-title">
+                    <div>
+                        <p class="fs-eyebrow">FIRESIDE GAMING · TEAM AREA</p>
+                        <h1 id="welcome-title">Deine Community im Überblick.</h1>
+                        <p>Spieler, Aktivität und Verwaltung – alles an einem Ort.</p>
+                    </div>
+                    <div class="fs-shortcuts">
+                        <?php if (!empty($_SESSION["rightsArr"]["visitPlayerOnline"])): ?>
+                        <a class="btn btn-default" href="onlinePlayers.php"><i class="fas fa-users" aria-hidden="true"></i> Spieler online</a>
+                        <?php endif; ?>
+                        <a class="btn btn-default" href="PatchNotes.php"><i class="fas fa-list" aria-hidden="true"></i> Patchnotes</a>
+                    </div>
+                </section>
 				<div class="row">
 					<div class="col-lg-4 col-xl-4">
 						<section class="card card-featured-left card-featured-primary mb-4">

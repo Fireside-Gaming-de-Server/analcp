@@ -87,7 +87,7 @@
 		<section class="body-sign">
 			<div class="center-sign">
 				<a href="/" class="logo float-left">
-					<img src="img/logo.png" height="54" alt="Porto Admin" />
+					<span class="fs-logo"><img src="img/fireside-logo.png" width="2048" height="2048" alt="Fireside Gaming"></span>
 				</a>
 
 				<div class="panel card-sign">
