@@ -533,7 +533,8 @@ if (apcu_exists('chartUniquePlayers14')) {
                     array('label' => 'Medics', 'count' => max(0, (int) $medInsgesamt), 'color' => '#f97373'),
                     array('label' => 'DOJ', 'count' => max(0, (int) $dojInsgesamt), 'color' => '#a78bfa'),
                     array('label' => 'RATS', 'count' => max(0, (int) $towInsgesamt), 'color' => '#fbbf24'),
-                    array('label' => 'GCM', 'count' => max(0, (int) $gcmInsgesamt), 'color' => '#38bdf8')
+                    array('label' => 'GCM', 'count' => max(0, (int) $gcmInsgesamt), 'color' => '#38bdf8'),
+                    array('label' => 'GC Paint and Tuning', 'count' => max(0, (int) $gcpatInsgesamt), 'color' => '#34d399')
                 );
                 $dashboardGroupTotal = array_sum(array_column($dashboardGroups, 'count'));
                 $dashboardStops = array();
@@ -558,7 +559,12 @@ if (apcu_exists('chartUniquePlayers14')) {
                             </div>
                         </div>
                         <div class="fs-community-details">
-                            <ul class="fs-community-legend" aria-label="Gruppenanzahlen">
+                            <ul class="fs-community-legend" aria-label="Spieler insgesamt und Gruppenanzahlen">
+                                <li class="fs-community-total">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    <span>Spieler insgesamt</span>
+                                    <strong><?php echo number_format((int) $usersComplete, 0, ',', '.'); ?></strong>
+                                </li>
                                 <?php foreach ($dashboardGroups as $group): ?>
                                 <li>
                                     <span class="fs-community-dot" style="background: <?php echo $group['color']; ?>;" aria-hidden="true"></span>
@@ -640,29 +646,6 @@ if (apcu_exists('chartUniquePlayers14')) {
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-block-question"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">GC Paint and Tuning INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $gcpatInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-				</div>
 
 				<div class="row">
 					<div class="col-lg-2 col-xl-2">

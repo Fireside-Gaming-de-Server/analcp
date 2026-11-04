@@ -186,3 +186,6 @@ html:root body .fs-community-layout { display: grid; grid-template-columns: minm
   .fs-community-ring { width: 220px; height: 220px; }
   .fs-community-center { width: 176px; height: 176px; }
 }
+
+.fs-community-total { color: #fff; font-weight: 600; }
+.fs-community-total i { color: #fff; width: 10px; font-size: 12px; }
