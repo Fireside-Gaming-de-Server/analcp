@@ -119,7 +119,8 @@ $stmt = $dbm->prepare("SELECT count(id) FROM vehicles");
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_row();
-$vehicleInsgesamt = number_format($row[0], 0, ',', '.');
+$vehicleCountRaw = (int) $row[0];
+$vehicleInsgesamt = number_format($vehicleCountRaw, 0, ',', '.');
 
 $stmt = $dbm->prepare("SELECT count(id) FROM houses");
 $stmt->execute();
@@ -684,71 +685,48 @@ if (apcu_exists('chartUniquePlayers14')) {
                         </div>
                     </div>
                 </section>
-<div class="row">
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-car"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">AUTOS INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $vehicleInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-home"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">HÄUSER INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $housesInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-building"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">FIRMEN INSGESAMT</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $entreprisesInsgesamt; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-				</div>
+                <?php
+                $inventoryParts = array(
+                    array('label' => 'Autos insgesamt', 'count' => max(0, $vehicleCountRaw), 'color' => '#ff1f1f'),
+                    array('label' => 'Häuser insgesamt', 'count' => max(0, (int) $housesInsgesamt), 'color' => '#38bdf8'),
+                    array('label' => 'Firmen insgesamt', 'count' => max(0, (int) $entreprisesInsgesamt), 'color' => '#a78bfa')
+                );
+                $inventoryTotal = array_sum(array_column($inventoryParts, 'count'));
+                $inventoryStops = array();
+                $inventoryPosition = 0;
+                foreach ($inventoryParts as $part) {
+                    if ($part['count'] === 0 || $inventoryTotal === 0) continue;
+                    $inventoryEnd = $inventoryPosition + $part['count'] / $inventoryTotal * 100;
+                    $inventoryStops[] = $part['color'] . ' ' . number_format($inventoryPosition, 4, '.', '') . '% ' . number_format($inventoryEnd, 4, '.', '') . '%';
+                    $inventoryPosition = $inventoryEnd;
+                }
+                $inventoryGradient = $inventoryTotal > 0 ? 'conic-gradient(' . implode(', ', $inventoryStops) . ')' : '#30353e';
+                ?>
+                <section class="card fs-community-card mb-4" aria-labelledby="inventory-chart-title">
+                    <header class="card-header">
+                        <h2 class="card-title" id="inventory-chart-title">Autos, Häuser &amp; Firmen</h2>
+                    </header>
+                    <div class="card-body fs-community-layout">
+                        <div class="fs-community-ring" style="background: <?php echo $inventoryGradient; ?>;" role="img" aria-label="<?php echo $inventoryTotal; ?> Einträge insgesamt. Die Anzahlen für Autos, Häuser und Firmen stehen in der Legende.">
+                            <div class="fs-community-center">
+                                <strong><?php echo number_format($inventoryTotal, 0, ',', '.'); ?></strong>
+                                <span>Einträge insgesamt</span>
+                            </div>
+                        </div>
+                        <div class="fs-community-details">
+                            <ul class="fs-community-legend" aria-label="Autos, Häuser und Firmen">
+                                <?php foreach ($inventoryParts as $part): ?>
+                                <li>
+                                    <span class="fs-community-dot" style="background: <?php echo $part['color']; ?>;" aria-hidden="true"></span>
+                                    <span><?php echo $part['label']; ?></span>
+                                    <strong><?php echo number_format($part['count'], 0, ',', '.'); ?></strong>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <p class="fs-community-note"><?php echo $inventoryTotal === 0 ? 'Noch keine Einträge vorhanden.' : 'Verteilung nach Anzahl der Autos, Häuser und Firmen.'; ?></p>
+                        </div>
+                    </div>
+                </section>
 
 
 
