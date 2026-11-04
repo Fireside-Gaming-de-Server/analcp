@@ -528,6 +528,54 @@ if (apcu_exists('chartUniquePlayers14')) {
                     </div>
                 </section>
                 <?php
+                $onlineDashboardGroups = array(
+                    array('label' => 'Civs online', 'count' => max(0, (int) $onlineCivsCount), 'color' => '#38bdf8'),
+                    array('label' => 'Cops online', 'count' => max(0, (int) $onlineCopsCount), 'color' => '#ff1f1f'),
+                    array('label' => 'Medics online', 'count' => max(0, (int) $onlineMedsCount), 'color' => '#f97373')
+                );
+                $onlineDashboardGroupTotal = array_sum(array_column($onlineDashboardGroups, 'count'));
+                $onlineDashboardStops = array();
+                $onlineDashboardPosition = 0;
+                foreach ($onlineDashboardGroups as $group) {
+                    if ($group['count'] === 0 || $onlineDashboardGroupTotal === 0) continue;
+                    $onlineDashboardEnd = $onlineDashboardPosition + $group['count'] / $onlineDashboardGroupTotal * 100;
+                    $onlineDashboardStops[] = $group['color'] . ' ' . number_format($onlineDashboardPosition, 4, '.', '') . '% ' . number_format($onlineDashboardEnd, 4, '.', '') . '%';
+                    $onlineDashboardPosition = $onlineDashboardEnd;
+                }
+                $onlineDashboardGradient = $onlineDashboardGroupTotal > 0 ? 'conic-gradient(' . implode(', ', $onlineDashboardStops) . ')' : '#30353e';
+                ?>
+                <section class="card fs-community-card mb-4" aria-labelledby="online-chart-title">
+                    <header class="card-header">
+                        <h2 class="card-title" id="online-chart-title">Spieler online</h2>
+                    </header>
+                    <div class="card-body fs-community-layout">
+                        <div class="fs-community-ring" style="background: <?php echo $onlineDashboardGradient; ?>;" role="img" aria-label="Gruppenverteilung. <?php echo (int) $onlineCount; ?> Spieler online insgesamt. Gruppenanzahlen stehen in der Legende.">
+                            <div class="fs-community-center">
+                                <strong><?php echo number_format((int) $onlineCount, 0, ',', '.'); ?></strong>
+                                <span>Spieler online insgesamt</span>
+                            </div>
+                        </div>
+                        <div class="fs-community-details">
+                            <ul class="fs-community-legend" aria-label="Spieler online insgesamt und Gruppenanzahlen">
+                                <li class="fs-community-total">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    <span>Spieler online insgesamt</span>
+                                    <strong><?php echo number_format((int) $onlineCount, 0, ',', '.'); ?></strong>
+                                </li>
+                                <?php foreach ($onlineDashboardGroups as $group): ?>
+                                <li>
+                                    <span class="fs-community-dot" style="background: <?php echo $group['color']; ?>;" aria-hidden="true"></span>
+                                    <span><?php echo $group['label']; ?></span>
+                                    <strong><?php echo number_format($group['count'], 0, ',', '.'); ?></strong>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <p class="fs-community-note"><?php echo $onlineDashboardGroupTotal === 0 ? 'Aktuell sind keine Spieler online. ' : ''; ?>Verteilung der Online-Gruppen laut Serverdaten.</p>
+                        </div>
+                    </div>
+                </section>
+
+				<?php
                 $dashboardGroups = array(
                     array('label' => 'Cops', 'count' => max(0, (int) $copsInsgesamt), 'color' => '#ff1f1f'),
                     array('label' => 'Medics', 'count' => max(0, (int) $medInsgesamt), 'color' => '#f97373'),
@@ -574,54 +622,6 @@ if (apcu_exists('chartUniquePlayers14')) {
                                 <?php endforeach; ?>
                             </ul>
                             <p class="fs-community-note"><?php echo $dashboardGroupTotal === 0 ? 'Noch keine Gruppenzugehörigkeiten vorhanden. ' : ''; ?>Die Segmente zeigen die Verteilung der aufgeführten Gruppenzugehörigkeiten. Spieler können mehreren Gruppen angehören.</p>
-                        </div>
-                    </div>
-                </section>
-
-				<?php
-                $onlineDashboardGroups = array(
-                    array('label' => 'Civs online', 'count' => max(0, (int) $onlineCivsCount), 'color' => '#38bdf8'),
-                    array('label' => 'Cops online', 'count' => max(0, (int) $onlineCopsCount), 'color' => '#ff1f1f'),
-                    array('label' => 'Medics online', 'count' => max(0, (int) $onlineMedsCount), 'color' => '#f97373')
-                );
-                $onlineDashboardGroupTotal = array_sum(array_column($onlineDashboardGroups, 'count'));
-                $onlineDashboardStops = array();
-                $onlineDashboardPosition = 0;
-                foreach ($onlineDashboardGroups as $group) {
-                    if ($group['count'] === 0 || $onlineDashboardGroupTotal === 0) continue;
-                    $onlineDashboardEnd = $onlineDashboardPosition + $group['count'] / $onlineDashboardGroupTotal * 100;
-                    $onlineDashboardStops[] = $group['color'] . ' ' . number_format($onlineDashboardPosition, 4, '.', '') . '% ' . number_format($onlineDashboardEnd, 4, '.', '') . '%';
-                    $onlineDashboardPosition = $onlineDashboardEnd;
-                }
-                $onlineDashboardGradient = $onlineDashboardGroupTotal > 0 ? 'conic-gradient(' . implode(', ', $onlineDashboardStops) . ')' : '#30353e';
-                ?>
-                <section class="card fs-community-card mb-4" aria-labelledby="online-chart-title">
-                    <header class="card-header">
-                        <h2 class="card-title" id="online-chart-title">Spieler online</h2>
-                    </header>
-                    <div class="card-body fs-community-layout">
-                        <div class="fs-community-ring" style="background: <?php echo $onlineDashboardGradient; ?>;" role="img" aria-label="Gruppenverteilung. <?php echo (int) $onlineCount; ?> Spieler online insgesamt. Gruppenanzahlen stehen in der Legende.">
-                            <div class="fs-community-center">
-                                <strong><?php echo number_format((int) $onlineCount, 0, ',', '.'); ?></strong>
-                                <span>Spieler online insgesamt</span>
-                            </div>
-                        </div>
-                        <div class="fs-community-details">
-                            <ul class="fs-community-legend" aria-label="Spieler online insgesamt und Gruppenanzahlen">
-                                <li class="fs-community-total">
-                                    <i class="fas fa-users" aria-hidden="true"></i>
-                                    <span>Spieler online insgesamt</span>
-                                    <strong><?php echo number_format((int) $onlineCount, 0, ',', '.'); ?></strong>
-                                </li>
-                                <?php foreach ($onlineDashboardGroups as $group): ?>
-                                <li>
-                                    <span class="fs-community-dot" style="background: <?php echo $group['color']; ?>;" aria-hidden="true"></span>
-                                    <span><?php echo $group['label']; ?></span>
-                                    <strong><?php echo number_format($group['count'], 0, ',', '.'); ?></strong>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
-                            <p class="fs-community-note"><?php echo $onlineDashboardGroupTotal === 0 ? 'Aktuell sind keine Spieler online. ' : ''; ?>Verteilung der Online-Gruppen laut Serverdaten.</p>
                         </div>
                     </div>
                 </section>
