@@ -602,7 +602,8 @@ if (apcu_exists('chartUniquePlayers14')) {
                 }
                 $dashboardGradient = $dashboardGroupTotal > 0 ? 'conic-gradient(' . implode(', ', $dashboardStops) . ')' : '#30353e';
                 ?>
-                <section class="card fs-community-card mb-4" aria-labelledby="community-chart-title">
+                <div class="fs-player-charts">
+<section class="card fs-community-card mb-4" aria-labelledby="community-chart-title">
                     <header class="card-header">
                         <h2 class="card-title" id="community-chart-title">Spieler &amp; Gruppenzugehörigkeiten</h2>
                     </header>
@@ -632,6 +633,22 @@ if (apcu_exists('chartUniquePlayers14')) {
                         </div>
                     </div>
                 </section>
+                    <section class="card fs-community-card fs-banned-card mb-4" aria-labelledby="banned-chart-title">
+                        <header class="card-header">
+                            <h2 class="card-title" id="banned-chart-title">Aktuell gebannte Spieler</h2>
+                        </header>
+                        <div class="card-body fs-community-layout">
+                            <div class="fs-community-ring fs-banned-ring">
+                                <div class="fs-community-center">
+                                    <i class="fas fa-ban" aria-hidden="true"></i>
+                                    <strong><?php echo number_format((int) $activBannedPlayer, 0, ',', '.'); ?></strong>
+                                    <span>Aktuell gebannt</span>
+                                </div>
+                            </div>
+                            <p class="fs-community-note">Aktuelle Sperren laut Banliste.</p>
+                        </div>
+                    </section>
+</div>
 
 
 
@@ -774,27 +791,6 @@ if (apcu_exists('chartUniquePlayers14')) {
 							</div>
 						</section>
 					</div> -->
-					<div class="col-lg-2 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-ban"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">AKTUELL GEBANNTE SPIELER</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $activBannedPlayer; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
 					<!-- <div class="col-lg-4 col-xl-4">
 						<section class="card card-featured-left card-featured-primary mb-4">
 							<div class="card-body">

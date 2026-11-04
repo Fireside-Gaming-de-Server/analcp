@@ -194,3 +194,13 @@ html:root body .fs-community-layout { display: grid; grid-template-columns: minm
 .fs-wealth-card .fs-community-details { min-width: 0; }
 .fs-wealth-card .fs-community-legend li { flex-wrap: wrap; }
 .fs-wealth-card .fs-community-legend strong { overflow-wrap: anywhere; }
+
+.fs-player-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.fs-player-charts > .card { min-width: 0; }
+html:root body .fs-player-charts .fs-community-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 28px 24px; }
+.fs-banned-ring { background: var(--fs-red); }
+.fs-banned-ring .fs-community-center i { color: #fff; font-size: 22px; margin-bottom: 8px; }
+.fs-banned-card .fs-community-note { text-align: center; }
+@media (max-width: 1100px) {
+  .fs-player-charts { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
