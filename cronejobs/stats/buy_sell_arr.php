@@ -1,0 +1,53 @@
+<?php 
+
+$buySellArr = array(
+    "STR_Item_zuckererdbeeren" => "Zuckererdbeeren",
+    "STR_Item_aluminium" => "Aluminium",
+    "STR_Item_kaesekuchen" => "Käsekuchen",
+    "STR_Item_klopapier" => "Klopapier",
+    "STR_Item_artefakt" => "Artefakt",
+    "str_item_benzin" => "Benzin",
+    "STR_Item_bluecrystal" => "BlueCrystal",
+    "STR_Item_zartbitter_schokolade" => "Zartbitter Schokolade",
+    "STR_Item_CementBag" => "Zement",
+    "STR_Item_CocaineP" => "Kokain",
+    "STR_Item_CopperIngot" => "Kupfer",
+    "STR_Item_crystal" => "Crystal",
+    "str_item_diesel" => "Diesel",
+    "STR_Item_vollmilch_schokolade" => "Vollmilch Schokolade",
+    "STR_Item_schokotorte" => "Schokotorte",
+    "str_item_streckdiesel" => "Gestreckter Diesel",
+    "str_item_hubba_bubba" => "Hubba Bubba",
+    "STR_Item_cocaine_gestreckt" => "Gestrecktes Koks",
+    "STR_Item_flasche" => "Flasche",
+    "STR_Item_Glass" => "Glas",
+    "STR_Item_gold_refinded" => "Gold",
+    "STR_Item_center_shock" => "Center Shock",
+    "STR_Item_bier" => "Bier",
+    "STR_Item_taschentuch" => "Taschentuch",
+    "STR_Item_holzbretter" => "Holzbretter",
+    "STR_Item_IronIngot" => "Eisen",
+    "STR_Item_joint" => "Joint",
+    "STR_Item_strauss_rosen" => "Strauss Rosen",
+    "STR_Item_Kupferkabel" => "Kuferkabel",
+    "STR_Item_magicmushroom" => "MagicMushroom",
+    "STR_Item_mehl" => "Mehl",
+    "STR_Item_moonshine" => "Moonshine",
+    "STR_Item_papier" => "Papier",
+    "STR_Item_Plastik" => "Plastik",
+    "STR_Item_DiamondC" => "Diamant",
+    "STR_Item_Marijuana" => "Marijuana",
+    "STR_Item_OilP" => "Öl",
+    "STR_Item_TurtleRaw" => "Schildkröte",
+    "STR_Item_TurtleSoup" => "Schildkrötensuppe",
+    "STR_Item_SaltR" => "Salz",
+    "STR_Item_smaragt" => "Smaragt",
+    "STR_Item_tabak" => "Tabak",
+    "STR_Item_ziegelstein" => "Ziegelstein",
+    "STR_Item_zigaretten" => "Zigaretten",
+    "STR_Item_zuckerver" => "Zucker"
+    "STR_Item_tomate" => "Tomate"
+);
+
+
+?>
