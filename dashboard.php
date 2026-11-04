@@ -215,6 +215,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 
+$wealthChartParts = array(
+    array('label' => 'Spielergeld (Bank & Bargeld)', 'value' => (float) $playerValue, 'color' => '#ff1f1f'),
+    array('label' => 'Garagenvermögen', 'value' => (float) $priceVehValue, 'color' => '#38bdf8'),
+    array('label' => 'Lizenzvermögen', 'value' => (float) $LicenseVal, 'color' => '#a78bfa')
+);
+$wealthChartTotal = $priceVehValue + $playerValue + $LicenseVal;
 $gesamtVermögen = number_format($priceVehValue + $playerValue + $LicenseVal, 0, ',', '.');
 $priceVehValue = number_format($priceVehValue, 0, ',', '.');
 $playerValue = number_format($playerValue, 0, ',', '.');
@@ -628,28 +634,57 @@ if (apcu_exists('chartUniquePlayers14')) {
 
 
 
-				<div class="row">
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-dollar-sign"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">GELD IM UMLAUF</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $moneyTotal; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
+				                <?php
+                $wealthChartStops = array();
+                $wealthChartPosition = 0;
+                $wealthPositiveTotal = 0;
+                foreach ($wealthChartParts as $part) {
+                    $wealthPositiveTotal += max(0, $part['value']);
+                }
+                foreach ($wealthChartParts as $part) {
+                    if ($part['value'] <= 0 || $wealthPositiveTotal <= 0) continue;
+                    $wealthChartEnd = $wealthChartPosition + $part['value'] / $wealthPositiveTotal * 100;
+                    $wealthChartStops[] = $part['color'] . ' ' . number_format($wealthChartPosition, 4, '.', '') . '% ' . number_format($wealthChartEnd, 4, '.', '') . '%';
+                    $wealthChartPosition = $wealthChartEnd;
+                }
+                $wealthChartGradient = $wealthPositiveTotal > 0 ? 'conic-gradient(' . implode(', ', $wealthChartStops) . ')' : '#30353e';
+                ?>
+                <section class="card fs-community-card fs-wealth-card mb-4" aria-labelledby="wealth-chart-title">
+                    <header class="card-header">
+                        <h2 class="card-title" id="wealth-chart-title">Geld &amp; Gesamtvermögen</h2>
+                    </header>
+                    <div class="card-body fs-community-layout">
+                        <div class="fs-community-ring" style="background: <?php echo $wealthChartGradient; ?>;" role="img" aria-label="Vermögensverteilung: <?php echo number_format($wealthChartTotal, 0, ',', '.'); ?> Dollar Gesamtvermögen. Einzelwerte stehen in der Legende.">
+                            <div class="fs-community-center">
+                                <strong><?php echo number_format($wealthChartTotal, 0, ',', '.'); ?></strong>
+                                <span>$ Gesamtvermögen</span>
+                            </div>
+                        </div>
+                        <div class="fs-community-details">
+                            <ul class="fs-community-legend" aria-label="Vermögenswerte">
+                                <li class="fs-community-total">
+                                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                                    <span>Gesamtvermögen</span>
+                                    <strong><?php echo number_format($wealthChartTotal, 0, ',', '.'); ?> $</strong>
+                                </li>
+                                <?php foreach ($wealthChartParts as $part): ?>
+                                <li>
+                                    <span class="fs-community-dot" style="background: <?php echo $part['color']; ?>;" aria-hidden="true"></span>
+                                    <span><?php echo $part['label']; ?></span>
+                                    <strong><?php echo number_format($part['value'], 0, ',', '.'); ?> $</strong>
+                                </li>
+                                <?php endforeach; ?>
+                                <li class="fs-community-total">
+                                    <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+                                    <span>Geld im Umlauf</span>
+                                    <strong><?php echo $moneyTotal; ?> $</strong>
+                                </li>
+                            </ul>
+                            <p class="fs-community-note"><?php echo $wealthPositiveTotal <= 0 ? 'Keine positiven Vermögenswerte vorhanden. ' : ''; ?>Die Segmente zeigen positive Spielergeld-, Garagen- und Lizenzwerte. Geld im Umlauf wird separat ausgewiesen und nicht erneut zur Summe addiert. Für Geld im Umlauf wird eine kleinere Spielerauswahl berücksichtigt.</p>
+                        </div>
+                    </div>
+                </section>
+<div class="row">
 					<div class="col-lg-2 col-xl-2">
 						<section class="card card-featured-left card-featured-primary mb-4">
 							<div class="card-body">
@@ -715,92 +750,6 @@ if (apcu_exists('chartUniquePlayers14')) {
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-money-check-alt"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">GARAGEN GESAMTVERMÖGEN</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $priceVehValue; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-money-check-alt"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">SPIELER GESAMTVERMÖGEN</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $playerValue; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-money-check-alt"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">LIZENZ GESAMTVERMÖGEN</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $LicenseVal; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-					<div class="col-lg-2 col-xl-2">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fas fa-money-check-alt"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">GESAMTVERMÖGEN SUMME</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $gesamtVermögen; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-				</div>
 
 
 

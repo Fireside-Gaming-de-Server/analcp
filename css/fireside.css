@@ -189,3 +189,8 @@ html:root body .fs-community-layout { display: grid; grid-template-columns: minm
 
 .fs-community-total { color: #fff; font-weight: 600; }
 .fs-community-total i { color: #fff; width: 10px; font-size: 12px; }
+
+.fs-wealth-card .fs-community-center strong { max-width: 90%; font-size: 20px; overflow-wrap: anywhere; text-align: center; line-height: 1.4; }
+.fs-wealth-card .fs-community-details { min-width: 0; }
+.fs-wealth-card .fs-community-legend li { flex-wrap: wrap; }
+.fs-wealth-card .fs-community-legend strong { overflow-wrap: anywhere; }
