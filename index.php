@@ -6,6 +6,7 @@ if ((isset($_COOKIE["username"])) && (isset($_COOKIE["usergroup"])) && (isset($_
 }
 
 include 'includes/function.php';
+$loginError = "";
 
 
 
@@ -83,7 +84,7 @@ if (isset($_POST['submit'])) {
 	$result = $stmt->get_result();
 	$row = $result->fetch_row();
 	if ($row == 0) {
-		echo "Username nicht vergeben";
+		$loginError = "Benutzername oder Passwort ist nicht korrekt.";
 	} else {
 		if (password_verify($password, $row[2])) {
 			$identifier = random_string();
@@ -133,151 +134,73 @@ if (isset($_POST['submit'])) {
 			setcookie("securitytoken", $securitytoken, time() + (43200)); //12 Stunden gültig
 			header("location: dashboard");
 		} else {
-			echo "Password Falsch";
+			$loginError = "Benutzername oder Passwort ist nicht korrekt.";
 		}
-		echo "Username Richtig";
+
 	}
 }
 ?>
 
 <!doctype html>
-<html class="fixed dark">
-
+<html lang="de">
 <head>
-
-	<!-- Basic -->
 	<meta charset="UTF-8">
-
-	<meta name="keywords" content="HTML5 Admin Template" />
-	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-	<meta name="author" content="okler.net">
-
-	<!-- Mobile Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-	<!-- Web Fonts  -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,800,900|Shadows+Into+Light" rel="stylesheet" type="text/css">
-
-	<!-- Vendor CSS -->
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
-	<link rel="stylesheet" href="vendor/animate/animate.css">
-
-	<link rel="stylesheet" href="vendor/font-awesome/css/all.css" />
-	<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" />
-	<link rel="stylesheet" href="vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" href="css/theme.css" />
-
-	<!-- Skin CSS -->
-	<link rel="stylesheet" href="css/skins/default.css" />
-
-	<!-- Theme Custom CSS -->
-	<link rel="stylesheet" href="css/custom.css">
-
-	<!-- Head Libs -->
-	<script src="vendor/modernizr/modernizr.js"></script>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Der Team-Zugang zum Fireside Gaming Adminpanel.">
+	<title>Anmelden · Fireside Gaming</title>
+	<link rel="icon" href="img/favicon.ico">
+	<link rel="stylesheet" href="vendor/font-awesome/css/all.css">
+	<link rel="stylesheet" href="css/login.css">
 </head>
-
-<body class="loading-overlay-showing" data-loading-overlay>
-	<div class="loading-overlay">
-		<div class="bounce-loader">
-			<div class="bounce1"></div>
-			<div class="bounce2"></div>
-			<div class="bounce3"></div>
-		</div>
-	</div>
-	<!-- start: page -->
-	<section class="body-sign">
-		<div class="center-sign">
-			<a href="/" class="logo float-left">
-				<img src="img/logo.png" height="54" alt="Porto Admin" />
+<body class="login-page">
+	<div class="login-shell">
+		<header class="site-header">
+			<a class="brand" href="index.php" aria-label="Fireside Gaming Startseite">
+				<span class="brand-icon" aria-hidden="true"><i class="fas fa-fire"></i></span>
+				<span>FIRESIDE<span class="brand-subtitle">GAMING COMMUNITY</span></span>
 			</a>
+			<span class="header-label">ADMIN CONTROL PANEL</span>
+		</header>
 
-			<div class="panel card-sign">
-				<div class="card-title-sign mt-3 text-right">
-					<h2 class="title text-uppercase font-weight-bold m-0"><i class="fas fa-user mr-1"></i> Anmelden</h2>
+		<main class="login-layout">
+			<section class="intro" aria-labelledby="intro-title">
+				<p class="eyebrow"><span></span> DER PLATZ FÜR DEIN TEAM</p>
+				<h1 id="intro-title">Deine Community.<br>Alles <span>im Blick.</span></h1>
+				<p class="intro-copy">Gemeinsam für ein besseres Spielerlebnis. Verwalte Spieler, unterstütze deine Community und behalte den Überblick.</p>
+				<div class="feature-list">
+					<div class="feature"><span class="feature-icon"><i class="fas fa-users" aria-hidden="true"></i></span><div><h2>Spieler & Community</h2><p>Alle wichtigen Informationen an einem Ort.</p></div></div>
+					<div class="feature"><span class="feature-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></span><div><h2>Support & Verwaltung</h2><p>Deine Werkzeuge für den Teamalltag.</p></div></div>
+					<div class="feature"><span class="feature-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span><div><h2>Aktivität & Überblick</h2><p>Behalte das Geschehen auf dem Server im Blick.</p></div></div>
 				</div>
-				<div class="card-body">
-					<form action="index.php" method="post">
-						<div class="form-group mb-3">
-							<label>Username</label>
-							<div class="input-group">
-								<input name="username" type="text" class="form-control form-control-lg" />
-								<span class="input-group-append">
-									<span class="input-group-text">
-										<i class="fas fa-user"></i>
-									</span>
-								</span>
-							</div>
-						</div>
+				<div class="intro-note"><span class="note-line"></span> FIRESIDE GAMING · TEAM AREA</div>
+			</section>
 
-						<div class="form-group mb-3">
-							<div class="clearfix">
-								<label class="float-left">Password</label>
-							</div>
-							<div class="input-group">
-								<input name="pwd" type="password" class="form-control form-control-lg" />
-								<span class="input-group-append">
-									<span class="input-group-text">
-										<i class="fas fa-lock"></i>
-									</span>
-								</span>
-							</div>
-						</div>
+			<section class="login-card" aria-labelledby="login-title">
+				<div class="card-icon" aria-hidden="true"><i class="fas fa-sign-in-alt"></i></div>
+				<p class="eyebrow card-eyebrow">WILLKOMMEN ZURÜCK</p>
+				<h2 id="login-title">Anmelden</h2>
+				<p class="card-copy">Melde dich mit deinem Team-Account an.</p>
+				<?php if ($loginError !== ""): ?>
+					<div class="login-error" role="alert"><?php echo htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8'); ?></div>
+				<?php endif; ?>
+				<form action="index.php" method="post">
+					<div class="field">
+						<label for="username">Benutzername</label>
+						<div class="input-wrap"><i class="fas fa-user" aria-hidden="true"></i><input id="username" name="username" type="text" autocomplete="username" placeholder="Dein Benutzername" required></div>
+					</div>
+					<div class="field">
+						<label for="password">Passwort</label>
+						<div class="input-wrap"><i class="fas fa-lock" aria-hidden="true"></i><input id="password" name="pwd" type="password" autocomplete="current-password" placeholder="Dein Passwort" required></div>
+					</div>
+					<button class="login-button" type="submit" name="submit">Anmelden <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+				</form>
+				<div class="divider"><span>oder mit Steam fortfahren</span></div>
+				<a class="steam-button" href="?login"><i class="fab fa-steam" aria-hidden="true"></i> Mit Steam anmelden</a>
+				<p class="access-note"><i class="fas fa-lock" aria-hidden="true"></i> Zugang nur für berechtigte Teammitglieder.</p>
+			</section>
+		</main>
 
-						<div class="row">
-							<div class="col-sm-1">
-							</div>
-							<div class="col-sm-10">
-								<button type="submit" name="submit" class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block">ANMELDEN</button>
-							</div>
-							<div class="col-sm-1">
-							</div>
-						</div>
-
-						<span class="mt-3 mb-3 line-thru text-center text-uppercase">
-							<span>or</span>
-						</span>
-
-						<div class="mb-1 text-center">
-							<?php loginbutton(); //login button ?>
-						</div>
-
-						<!-- <p class="text-center">Don't have an account yet? <a href="registerSteam.php">Registrieren!</a></p> -->
-
-					</form>
-				</div>
-			</div>
-
-			<p class="text-center text-muted mt-3 mb-3">&copy; Made with ♥ by Klausi edit by Fireside-Gaming.de</p>
-		</div>
-	</section>
-	<!-- end: page -->
-
-	<!-- Vendor -->
-	<script src="vendor/jquery/jquery.js"></script>
-	<script src="vendor/pnotify/pnotify.custom.js"></script>
-	<script src="js/examples/examples.notifications.js"></script>
-	<script src="vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-	<script src="vendor/popper/umd/popper.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.js"></script>
-	<script src="vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script src="vendor/common/common.js"></script>
-	<script src="vendor/nanoscroller/nanoscroller.js"></script>
-	<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
-	<script src="vendor/jquery-placeholder/jquery.placeholder.js"></script>
-
-	<!-- Theme Base, Components and Settings -->
-	<script src="js/theme.js"></script>
-
-	<!-- Theme Custom -->
-	<script src="js/custom.js"></script>
-
-	<!-- Theme Initialization Files -->
-	<script src="js/theme.init.js"></script>
-
+		<footer class="site-footer"><span>© Fireside Gaming</span><span>Made with <span class="heart">♥</span> by Klausi · Edit by Fireside-Gaming.de</span></footer>
+	</div>
 </body>
-
 </html>
