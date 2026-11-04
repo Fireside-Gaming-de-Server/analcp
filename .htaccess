@@ -1,0 +1,17 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)$ $1.php [L]
+
+<RequireAll>
+    Require all granted
+    Require not ip 208.115.199.26
+</RequireAll>
+
+
+SetEnvIfNoCase User-Agent "BadBot" bad_bot
+SetEnvIfNoCase User-Agent "AnotherBadBot" bad_bot
+
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
