@@ -156,8 +156,7 @@ if (isset($_POST['submit'])) {
 	<div class="login-shell">
 		<header class="site-header">
 			<a class="brand" href="index.php" aria-label="Fireside Gaming Startseite">
-				<span class="brand-icon" aria-hidden="true"><i class="fas fa-fire"></i></span>
-				<span>FIRESIDE<span class="brand-subtitle">GAMING COMMUNITY</span></span>
+				<span class="brand-logo"><img src="img/fireside-logo.png" alt="Fireside Gaming" width="2048" height="2048"></span>
 			</a>
 			<span class="header-label">ADMIN CONTROL PANEL</span>
 		</header>
