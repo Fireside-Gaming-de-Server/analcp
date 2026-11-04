@@ -58,7 +58,7 @@ html:root body .card-actions a { color: var(--fs-muted); }
 html:root body .widget-summary .summary .title { color: var(--fs-muted); font-size: 11px; font-weight: 600; letter-spacing: .7px; line-height: 1.6; }
 html:root body .widget-summary .summary .amount { color: var(--fs-text); font-size: 30px; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
 html:root body .widget-summary .summary-icon { border-radius: 14px; }
-html:root body .widget-summary .summary-icon.bg-primary { background: #ff1f1f14 !important; color: #ff6262; }
+html:root body .widget-summary .summary-icon.bg-primary { background: #ff1f1f14 !important; color: #fff; }
 html:root body .widget-summary .summary-footer { border-color: var(--fs-border); }
 html:root body .table { color: #d6dce5; }
 html:root body .table th, html:root body .table td { border-color: #30353e; padding: 12px 14px; vertical-align: middle; }
