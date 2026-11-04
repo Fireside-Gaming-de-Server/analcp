@@ -228,7 +228,7 @@ if (in_array($groupID, $dbDoubleAcc)) {
 
 
 
-if ((in_array($groupID, $dbSpielerLevelid))  or (in_array($groupID, $dbSpielerMoney))  or (in_array($groupID, $dbVehicles)) or (in_array($groupID, $dbGangs)) or (in_array($groupID, $dbDoubleAcc))) {
+if ((in_array($groupID, $dbSpielerLevelid))  or (in_array($groupID, $dbSpielerMoney))  or (in_array($groupID, $dbVehicles)) or (in_array($groupID, $dbGangs)) or (in_array($groupID, $dbCopInformation)) or (in_array($groupID, $dbMedInformation)) or (in_array($groupID, $dbDoubleAcc))) {
     echo '
         </ul>
     </li>';
