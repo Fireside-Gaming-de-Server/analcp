@@ -40,12 +40,12 @@ html:root body ul.nav-main li a:hover { color: #fff; background: #ffffff08; }
 html:root body ul.nav-main li.nav-active > a,
 html:root body ul.nav-main li.nav-active > a:hover { color: #fff; background: #ff1f1f18; box-shadow: inset 3px 0 var(--fs-red); }
 html:root body ul.nav-main li.nav-active > a i { color: #ff6666; }
-html:root body ul.nav-main li .nav-children { background: #111418; border-radius: 6px; margin: 4px 10px; box-shadow: none; }
+html:root body ul.nav-main li .nav-children { background: #111418; border-radius: 8px; margin: 4px 10px; }
 html:root body ul.nav-main li .nav-children li a { padding-top: 9px; padding-bottom: 9px; }
 html:root body .page-header { background: #181b20; border-color: var(--fs-border); box-shadow: 0 1px 0 var(--fs-border); }
 html:root body .page-header h2 { border-bottom: 2px solid var(--fs-red); font-weight: 600; font-size: 17px; letter-spacing: -.3px; }
 html:root body .content-body { background: radial-gradient(ellipse at top left, #ff1f1f05, transparent 55%), var(--fs-bg); }
-html:root body .card { background: var(--fs-panel); border: 1px solid #ffffff0b; border-radius: 10px; box-shadow: 0 4px 16px #00000012; }
+html:root body .card { background: var(--fs-panel); border-radius: 12px; box-shadow: 0 6px 24px #0002; }
 html:root body .card-header { background: #1e2228; border-bottom: 1px solid var(--fs-border); border-radius: 12px 12px 0 0; padding: 20px 24px; }
 html:root body .card-body { background: var(--fs-panel); color: var(--fs-text); padding: 24px; border-radius: 0 0 12px 12px; }
 html:root body .card-body:first-child { border-radius: 12px; }
@@ -57,8 +57,8 @@ html:root body .card-featured-left { border-left-width: 3px; }
 html:root body .card-actions a { color: var(--fs-muted); }
 html:root body .widget-summary .summary .title { color: var(--fs-muted); font-size: 11px; font-weight: 600; letter-spacing: .7px; line-height: 1.6; }
 html:root body .widget-summary .summary .amount { color: var(--fs-text); font-size: 30px; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
-html:root body .widget-summary .summary-icon { border-radius: 10px; }
-html:root body .widget-summary .summary-icon.bg-primary { background: #ff1f1f14 !important; color: #ff6262; border: 1px solid #ff1f1f18; }
+html:root body .widget-summary .summary-icon { border-radius: 14px; }
+html:root body .widget-summary .summary-icon.bg-primary { background: #ff1f1f14 !important; color: #ff6262; }
 html:root body .widget-summary .summary-footer { border-color: var(--fs-border); }
 html:root body .table { color: #d6dce5; }
 html:root body .table th, html:root body .table td { border-color: #30353e; padding: 12px 14px; vertical-align: middle; }
@@ -115,7 +115,7 @@ html:root body .body-sign .card-sign .card-body { border-top-color: var(--fs-red
 html:root body .body-sign .card-sign .card-title-sign .title { background: var(--fs-red); color: #101214; }
 html:root body .body-sign .line-thru span { background: var(--fs-panel); color: var(--fs-muted); }
 html:root body :is(a,button,input,select,textarea):focus-visible { outline: 2px solid #ff7777; outline-offset: 3px; }
-.fs-welcome { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 30px; margin: 30px 0 24px; border: 1px solid #ff1f1f25; border-radius: 14px; background: radial-gradient(ellipse at top right, #ff1f1f12, transparent 65%), #1a1d22; }
+.fs-welcome { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 30px; margin: 30px 0 0; border: 1px solid #ff1f1f25; border-radius: 14px; background: radial-gradient(ellipse at top right, #ff1f1f12, transparent 65%), #1a1d22; }
 .fs-welcome .fs-eyebrow { margin: 0 0 8px; color: #ff7777; font-size: 10px; font-weight: 700; letter-spacing: 2px; }
 .fs-welcome h1 { margin: 0 0 8px; font-size: 28px; font-weight: 650; letter-spacing: -.8px; line-height: 1.2; }
 .fs-welcome p { color: var(--fs-muted); margin: 0; }
@@ -159,10 +159,6 @@ html:root body ul.nav-main li.nav-parent > a { position: relative; padding-right
 html:root body ul.nav-main li.nav-parent > a::after { top: 50%; right: 12px; padding: 0; transform: translateY(-50%); width: 16px; text-align: center; }
 html:root body ul.nav-main li .nav-children li a { padding-left: 24px; white-space: normal; overflow-wrap: anywhere; }
 html:root body ul.nav-main li .nav-children .nav-children li a { padding-left: 24px; }
-html:root body .content-body.card-margin .card { margin-top: 0; }
-html:root body .content-body.card-margin > .row { margin-bottom: 4px; }
-html:root body .widget-summary.widget-summary-md .summary-icon { width: 48px; height: 48px; line-height: 46px; font-size: 23px; }
-html:root body .widget-summary .summary .amount { font-size: 28px; font-weight: 600; }
 html:root body .sidebar-toggle, html:root body .toggle-sidebar-left { border: 0; cursor: pointer; }
 @media (min-width: 768px) {
   html:root.sidebar-left-collapsed body .sidebar-left .nano:not(:hover):not(.hovered) ul.nav-main > li > a { margin: 4px 6px; padding: 12px 0; text-align: center; }
