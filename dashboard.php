@@ -578,73 +578,54 @@ if (apcu_exists('chartUniquePlayers14')) {
                     </div>
                 </section>
 
-				<div class="row">
-					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-									<div class="summary-icon bg-primary">
-										<i class="fa-solid fa-user"></i>
-									</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">CIVS ONLINE</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $onlineCivsCount; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-user-police"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">COPS ONLINE</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $onlineCopsCount; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
+				<?php
+                $onlineDashboardGroups = array(
+                    array('label' => 'Civs online', 'count' => max(0, (int) $onlineCivsCount), 'color' => '#38bdf8'),
+                    array('label' => 'Cops online', 'count' => max(0, (int) $onlineCopsCount), 'color' => '#ff1f1f'),
+                    array('label' => 'Medics online', 'count' => max(0, (int) $onlineMedsCount), 'color' => '#f97373')
+                );
+                $onlineDashboardGroupTotal = array_sum(array_column($onlineDashboardGroups, 'count'));
+                $onlineDashboardStops = array();
+                $onlineDashboardPosition = 0;
+                foreach ($onlineDashboardGroups as $group) {
+                    if ($group['count'] === 0 || $onlineDashboardGroupTotal === 0) continue;
+                    $onlineDashboardEnd = $onlineDashboardPosition + $group['count'] / $onlineDashboardGroupTotal * 100;
+                    $onlineDashboardStops[] = $group['color'] . ' ' . number_format($onlineDashboardPosition, 4, '.', '') . '% ' . number_format($onlineDashboardEnd, 4, '.', '') . '%';
+                    $onlineDashboardPosition = $onlineDashboardEnd;
+                }
+                $onlineDashboardGradient = $onlineDashboardGroupTotal > 0 ? 'conic-gradient(' . implode(', ', $onlineDashboardStops) . ')' : '#30353e';
+                ?>
+                <section class="card fs-community-card mb-4" aria-labelledby="online-chart-title">
+                    <header class="card-header">
+                        <h2 class="card-title" id="online-chart-title">Spieler online</h2>
+                    </header>
+                    <div class="card-body fs-community-layout">
+                        <div class="fs-community-ring" style="background: <?php echo $onlineDashboardGradient; ?>;" role="img" aria-label="Gruppenverteilung. <?php echo (int) $onlineCount; ?> Spieler online insgesamt. Gruppenanzahlen stehen in der Legende.">
+                            <div class="fs-community-center">
+                                <strong><?php echo number_format((int) $onlineCount, 0, ',', '.'); ?></strong>
+                                <span>Spieler online insgesamt</span>
+                            </div>
+                        </div>
+                        <div class="fs-community-details">
+                            <ul class="fs-community-legend" aria-label="Spieler online insgesamt und Gruppenanzahlen">
+                                <li class="fs-community-total">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    <span>Spieler online insgesamt</span>
+                                    <strong><?php echo number_format((int) $onlineCount, 0, ',', '.'); ?></strong>
+                                </li>
+                                <?php foreach ($onlineDashboardGroups as $group): ?>
+                                <li>
+                                    <span class="fs-community-dot" style="background: <?php echo $group['color']; ?>;" aria-hidden="true"></span>
+                                    <span><?php echo $group['label']; ?></span>
+                                    <strong><?php echo number_format($group['count'], 0, ',', '.'); ?></strong>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <p class="fs-community-note"><?php echo $onlineDashboardGroupTotal === 0 ? 'Aktuell sind keine Spieler online. ' : ''; ?>Verteilung der Online-Gruppen laut Serverdaten.</p>
+                        </div>
+                    </div>
+                </section>
 
-
-					<div class="col-lg-4 col-xl-4">
-						<section class="card card-featured-left card-featured-primary mb-4">
-							<div class="card-body">
-								<div class="widget-summary widget-summary-md">
-									<div class="widget-summary-col widget-summary-col-icon">
-										<div class="summary-icon bg-primary">
-											<i class="fa-solid fa-user-doctor"></i>
-										</div>
-									</div>
-									<div class="widget-summary-col">
-										<div class="summary">
-											<h5 class="title">MEDICS ONLINE</h5>
-											<div class="info">
-												<strong class="amount"><?php echo $onlineMedsCount; ?></strong>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-				</div>
 
 
 				<div class="row">
