@@ -2850,6 +2850,7 @@ function webhook($m, $webhookurl)
 													<tr>
 														<th>ID</th>
 														<th>Fahrzeug</th>
+														<th>Kennzeichen</th>
 														<th>Typ</th>
 														<th>Fahrzeugstatus</th>
 														<th>Derzeitiger Status</th>
@@ -2863,6 +2864,7 @@ function webhook($m, $webhookurl)
 													$stmt = $dbm->prepare("SELECT
 													vehicles.id,
 													vehicles.classname,
+													vehicles.immatriculation,
 													vehicles.type,
 													vehicles.alive,
 													vehicles.active,
@@ -2880,6 +2882,8 @@ function webhook($m, $webhookurl)
 														echo "<tr>";
 														echo "<td>" . $row['id'] . "</td>";
 														echo "<td>" . $row['classname'] . "</td>"; // translate($zeile['classname'])
+														$vehicleRegistration = trim((string) ($row['immatriculation'] ?? ''));
+														echo "<td>" . ($vehicleRegistration !== '' ? htmlspecialchars($vehicleRegistration, ENT_QUOTES, 'UTF-8') : '—') . "</td>";
 														echo "<td>" . $row['type'] . "</td>";
 														switch ($row['alive']) {
 															case 1:
