@@ -167,6 +167,10 @@
 				'bProcessing': true,
 				'serverSide': true,
 				'serverMethod': 'post',
+                'language': {
+                    'search': 'Suchen:',
+                    'searchPlaceholder': 'Kennzeichen, ID, PID …'
+                },
 				"pageLength": 100,
 				"lengthMenu": [[25, 50, 75, 100, 250, 500], [25, 50, 75, 100, 250, 500]],
 				'dom': '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',

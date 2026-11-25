@@ -17,7 +17,7 @@ $searchValue = $_POST['search']['value']; // Search value
 $searchQuery = "";
 if($searchValue != ''){
     //$searchQuery = " and (id like '%".$searchValue."%' or pid like '%".$searchValue."%' or type like '%".$searchValue."%' or side like '%".$searchValue."%') ";
-    $searchQuery = " and (pid like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or id like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or side like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or type like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or  classname like '%".mysqli_real_escape_string($dbm, $searchValue)."%') ";
+    $searchQuery = " and (pid like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or id like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or side like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or type like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or immatriculation like '%".mysqli_real_escape_string($dbm, $searchValue)."%' or classname like '%".mysqli_real_escape_string($dbm, $searchValue)."%') ";
 }
 
 ## Total number of records without filtering
@@ -104,6 +104,9 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
 }
 
 $response = array(
+  "draw" => (int) $draw,
+  "recordsTotal" => (int) $totalRecords,
+  "recordsFiltered" => (int) $totalRecordwithFilter,
   "aaData" => $data
 );
 
