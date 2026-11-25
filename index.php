@@ -148,7 +148,7 @@ if (isset($_POST['submit'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Der Team-Zugang zum Fireside Gaming Adminpanel.">
 	<title>Anmelden · Fireside Gaming</title>
-	<link rel="icon" href="img/favicon.ico">
+	<link rel="icon" href="img/logo.png">
 	<link rel="stylesheet" href="vendor/font-awesome/css/all.css">
 	<link rel="stylesheet" href="css/login.css">
 </head>
@@ -199,7 +199,7 @@ if (isset($_POST['submit'])) {
 			</section>
 		</main>
 
-		<footer class="site-footer"><span>© Fireside Gaming</span><span>Made with <span class="heart">♥</span> by Klausi · Edit by Fireside-Gaming.de</span></footer>
+		<footer class="site-footer"><span>© Fireside Gaming</span><span>Made with <span class="heart">♥</span> by Fireside-Gaming.de</span></footer>
 	</div>
 </body>
 </html>
